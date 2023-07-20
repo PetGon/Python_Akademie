@@ -33,12 +33,10 @@ other freshwater genera and herring similar to those
 in modern oceans. Other fish such as paddlefish,
 garpike and stingray are also present.'''
 ]
-
 registrovani_uzivatele = {"bob":"123", "ann":"pass123", "mike":"password123", "liz":"pass123"}
 
 jmeno = input("username:")
 heslo = input("password:")
-#print(registrovani_uzivatele.keys())
 if jmeno in registrovani_uzivatele.keys():
     if heslo != registrovani_uzivatele[jmeno]:
         print("unregistered user, terminating the program..")
