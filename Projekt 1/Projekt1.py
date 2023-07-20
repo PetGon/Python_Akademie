@@ -44,5 +44,4 @@ if jmeno in registrovani_uzivatele.keys():
 else:
     print("unregistered user, terminating the program..")
     quit()
-
-
+print("----------------------------------------")
