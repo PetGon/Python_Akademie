@@ -45,3 +45,11 @@ else:
     print("unregistered user, terminating the program..")
     quit()
 print("----------------------------------------")
+print("Welcome to the app,", jmeno)
+print("We have 3 texts to be analyzed.")
+print("----------------------------------------")
+select_number = input("Enter a number btw. 1 and 3 to select:")
+print("----------------------------------------")
+if not select_number.isnumeric() or int(select_number) < 1 or int(select_number) > 3:
+    print("incorrect choice, terminating the program..")
+
