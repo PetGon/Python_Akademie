@@ -45,4 +45,3 @@ else:
     print("unregistered user, terminating the program..")
     quit()
 print("----------------------------------------")
-print("Test")
