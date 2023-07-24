@@ -53,3 +53,10 @@ print("----------------------------------------")
 if not select_number.isnumeric() or int(select_number) < 1 or int(select_number) > 3:
     print("incorrect choice, terminating the program..")
 
+select_text = TEXTS[int(select_number) - 1]
+select_text = select_text.replace(".", "")
+select_text = select_text.replace(",", "")
+
+
+
+
