@@ -55,8 +55,16 @@ if not select_number.isnumeric() or int(select_number) < 1 or int(select_number)
 
 select_text = TEXTS[int(select_number) - 1]
 select_text = select_text.replace(".", "")
-select_text = select_text.replace(",", "")
+select_text = select_text.replace(",", "") # modifikace druhého zápisu "select_text" původně zadaného na ř.56
 
+split_text = select_text.split()
+pocet_slov = len(split_text)
+velke_pismeno = 0
+for slovo in split_text:
+    if slovo[0].upper():         # pokud první písmeno slova je velké
+        velke_pismeno += 1 # inkrementuji o jedna (int) 
+    print(slovo)
+print("pocet slov", pocet_slov)
 
 
 
