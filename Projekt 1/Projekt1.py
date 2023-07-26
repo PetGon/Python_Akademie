@@ -33,38 +33,57 @@ other freshwater genera and herring similar to those
 in modern oceans. Other fish such as paddlefish,
 garpike and stingray are also present.'''
 ]
-registrovani_uzivatele = {"bob":"123", "ann":"pass123", "mike":"password123", "liz":"pass123"}
+uzivatele = {"bob":"123", "ann":"pass123", "mike":"password123", "liz":"pass123"}
+ 
+def analyza(text):
+    pocet_slov = len(text)
+    velke_pismeno = 0
+    for slovo in text:
+        if slovo[0].upper():    # pokud první písmeno slova je velké
+            velke_pismeno += 1  # inkrementuji o jedna (int) 
+        print(slovo)
+    return pocet_slov
 
-jmeno = input("username:")
-heslo = input("password:")
-if jmeno in registrovani_uzivatele.keys():
-    if heslo != registrovani_uzivatele[jmeno]:
+def preved_text(text):
+    text = text.replace(".", "")
+    text = text.replace(",", "") # modifikace druhého zápisu "text" původně zadaného
+    prevedeny_text = text.split()
+    return prevedeny_text
+
+def vyber_text(texty):
+    select_number = input("Enter a number btw. 1 and 3 to select:")
+    print("----------------------------------------")
+    if not select_number.isnumeric() or int(select_number) < 1 or int(select_number) > 3:
+        print("incorrect choice, terminating the program..")
+        quit()
+    vybrany_text = texty[int(select_number) - 1]
+    return vybrany_text
+
+def over_uzivatele(zadane_jmeno, zadane_heslo, registrovani_uzivatele):
+    if zadane_jmeno in registrovani_uzivatele.keys():
+        if zadane_heslo != registrovani_uzivatele[zadane_jmeno]:
+            print("unregistered user, terminating the program..")
+            quit()    
+    else:
         print("unregistered user, terminating the program..")
-        quit()    
-else:
-    print("unregistered user, terminating the program..")
-    quit()
-print("----------------------------------------")
-print("Welcome to the app,", jmeno)
-print("We have 3 texts to be analyzed.")
-print("----------------------------------------")
-select_number = input("Enter a number btw. 1 and 3 to select:")
-print("----------------------------------------")
-if not select_number.isnumeric() or int(select_number) < 1 or int(select_number) > 3:
-    print("incorrect choice, terminating the program..")
+        quit()
 
-select_text = TEXTS[int(select_number) - 1]
-select_text = select_text.replace(".", "")
-select_text = select_text.replace(",", "") # modifikace druhého zápisu "select_text" původně zadaného na ř.56
+def zadej_uziv_udaje():
+    vloz_jmeno = input("username:")
+    vloz_heslo = input("password:")
+    return vloz_jmeno, vloz_heslo
 
-split_text = select_text.split()
-pocet_slov = len(split_text)
-velke_pismeno = 0
-for slovo in split_text:
-    if slovo[0].upper():         # pokud první písmeno slova je velké
-        velke_pismeno += 1 # inkrementuji o jedna (int) 
-    print(slovo)
-print("pocet slov", pocet_slov)
+def analyzuj_text(texty_k_analyze, registrovani_uzivatele):
+    zadane_jmeno, zadane_heslo = zadej_uziv_udaje()
+    over_uzivatele(zadane_jmeno, zadane_heslo, registrovani_uzivatele)
+    print("----------------------------------------")
+    print("Welcome to the app,", zadane_jmeno)
+    print("We have 3 texts to be analyzed.")
+    print("----------------------------------------")
+    vybrany_text = vyber_text(texty_k_analyze)
+    prevedeny_text = preved_text(vybrany_text)
+    pocet_slov = analyza(prevedeny_text)
+    print(pocet_slov)
+    pass
 
-
-
+analyzuj_text(TEXTS, uzivatele)
