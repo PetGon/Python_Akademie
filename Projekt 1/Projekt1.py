@@ -34,16 +34,35 @@ in modern oceans. Other fish such as paddlefish,
 garpike and stingray are also present.'''
 ]
 uzivatele = {"bob":"123", "ann":"pass123", "mike":"password123", "liz":"pass123"}
+
+def vsechna_mala_pismena(analyzovane_slovo, celkem_vsechna_mala):
+    if analyzovane_slovo.islower():
+        celkem_vsechna_mala += 1
+    return celkem_vsechna_mala
+
+def vsechna_velka_pismena(aktualne_analyzove_slovo,celkem_vsechna_velka):
+    if aktualne_analyzove_slovo.isupper():
+        celkem_vsechna_velka += 1
+    return celkem_vsechna_velka
  
+def velke_pismeno(slovo, celkem_vel_pismen):
+    if slovo[0].isupper():    # pokud první písmeno slova je velké
+    #if slovo.istitle():    # pokud první písmeno slova je velké
+        celkem_vel_pismen += 1  # inkrementuji o jedna (int) 
+    return celkem_vel_pismen
+
+
 def analyza(text):
     pocet_slov = len(text)
-    velke_pismeno = 0
+    celkem_velkych_pismen = 0
+    velka = 0
+    mala = 0
     for slovo in text:
-        if slovo[0].upper():    # pokud první písmeno slova je velké
-            velke_pismeno += 1  # inkrementuji o jedna (int) 
+        celkem_velkych_pismen = velke_pismeno(slovo, celkem_velkych_pismen)
+        velka = vsechna_velka_pismena(slovo, velka)
+        mala = vsechna_mala_pismena(slovo, mala)
         print(slovo)
-    return pocet_slov
-
+    return pocet_slov, celkem_velkych_pismen, velka, mala
 def preved_text(text):
     text = text.replace(".", "")
     text = text.replace(",", "") # modifikace druhého zápisu "text" původně zadaného
@@ -82,8 +101,11 @@ def analyzuj_text(texty_k_analyze, registrovani_uzivatele):
     print("----------------------------------------")
     vybrany_text = vyber_text(texty_k_analyze)
     prevedeny_text = preved_text(vybrany_text)
-    pocet_slov = analyza(prevedeny_text)
+    pocet_slov, celkem_velkych_pismen, velka, mala = analyza(prevedeny_text)
     print(pocet_slov)
+    print(celkem_velkych_pismen)
+    print(velka)
+    print(mala)
     pass
 
 analyzuj_text(TEXTS, uzivatele)
