@@ -119,15 +119,15 @@ def analyzuj_text(texty_k_analyze, registrovani_uzivatele):
     vybrany_text = vyber_text(texty_k_analyze)
     prevedeny_text = preved_text(vybrany_text)
     pocet_slov, celkem_velkych_pismen, velka, mala, pocet_cisel, suma_cisel, cetnost_slov = analyza(prevedeny_text)
-    print(f"There are {pocet_slov} wortd in the selected text.")
+    print(f"There are {pocet_slov} words in the selected text.")
     print(f"There are {celkem_velkych_pismen} titlecase words.")
-    print(f"There are{velka} uppercase words.")
-    print(f"There are{mala} lowercase words.")
+    print(f"There are {velka} uppercase words.")
+    print(f"There are {mala} lowercase words.")
     print(f"There are {pocet_cisel} numeric strings.")
     print(f"The sum of all the numbers {suma_cisel} ")  # 30N není bráno jako číslo 
-    print("********")
+    print("----------------------------------------")
     sorted_cetnost = dict(sorted(cetnost_slov.items()))
-    print(sorted_cetnost)
+    print("{:>0}{:^15}{:<0}".format("LEN|","OCCURENCES","|NR."))
     pass
 
 analyzuj_text(TEXTS, uzivatele)
