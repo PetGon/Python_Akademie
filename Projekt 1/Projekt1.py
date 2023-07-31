@@ -128,8 +128,9 @@ def analyzuj_text(texty_k_analyze, registrovani_uzivatele):
     print("----------------------------------------")
     sorted_cetnost = dict(sorted(cetnost_slov.items()))
     print("{:>0}{:^15}{:<0}".format("LEN|","OCCURENCES","|NR."))
+    print("----------------------------------------")
     for delka_pocet in sorted_cetnost.items():
-      print("{:>3}|{:^15}|{:<0}".format(delka_pocet[0],"*",delka_pocet[1]))  
+      print(f"{delka_pocet[0]:>3}|{'*' * delka_pocet[1]:<15}|{delka_pocet[1]:<0}")  
     pass
 
 analyzuj_text(TEXTS, uzivatele)
