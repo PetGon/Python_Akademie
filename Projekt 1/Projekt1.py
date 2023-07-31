@@ -126,7 +126,8 @@ def analyzuj_text(texty_k_analyze, registrovani_uzivatele):
     print(pocet_cisel)
     print(suma_cisel) # 30N není bráno jako číslo 
     print("********")
-    print(cetnost_slov)
+    sorted_cetnost = dict(sorted(cetnost_slov.items()))
+    print(sorted_cetnost)
     pass
 
 analyzuj_text(TEXTS, uzivatele)
