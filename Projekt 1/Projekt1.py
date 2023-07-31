@@ -35,13 +35,26 @@ garpike and stingray are also present.'''
 ]
 uzivatele = {"bob":"123", "ann":"pass123", "mike":"password123", "liz":"pass123"}
 
+def cetnost(analyzovane_slovo, cetnost_slov):
+    delka = len(analyzovane_slovo)
+    puvodni_cetnost = cetnost_slov.get(delka, 0) 
+    puvodni_cetnost += 1
+    cetnost_slov[delka] = puvodni_cetnost
+    return cetnost_slov
+
+def pocet_cisel(analyzovane_slovo, celkem_cisel, suma_cisel):
+    if analyzovane_slovo.isdigit():
+        celkem_cisel += 1
+        suma_cisel = suma_cisel + int(analyzovane_slovo)
+    return celkem_cisel, suma_cisel
+
 def vsechna_mala_pismena(analyzovane_slovo, celkem_vsechna_mala):
     if analyzovane_slovo.islower():
         celkem_vsechna_mala += 1
     return celkem_vsechna_mala
 
 def vsechna_velka_pismena(aktualne_analyzove_slovo,celkem_vsechna_velka):
-    if aktualne_analyzove_slovo.isupper():
+    if aktualne_analyzove_slovo.isupper() and aktualne_analyzove_slovo.isalpha():
         celkem_vsechna_velka += 1
     return celkem_vsechna_velka
  
@@ -57,12 +70,16 @@ def analyza(text):
     celkem_velkych_pismen = 0
     velka = 0
     mala = 0
+    celkem_cisel = 0
+    suma_cisel = 0
+    cetnost_slov = {}
     for slovo in text:
         celkem_velkych_pismen = velke_pismeno(slovo, celkem_velkych_pismen)
         velka = vsechna_velka_pismena(slovo, velka)
         mala = vsechna_mala_pismena(slovo, mala)
-        print(slovo)
-    return pocet_slov, celkem_velkych_pismen, velka, mala
+        celkem_cisel, suma_cisel = pocet_cisel(slovo, celkem_cisel, suma_cisel)
+        cetnost_slov = cetnost(slovo, cetnost_slov)
+    return pocet_slov, celkem_velkych_pismen, velka, mala, celkem_cisel, suma_cisel, cetnost_slov
 def preved_text(text):
     text = text.replace(".", "")
     text = text.replace(",", "") # modifikace druhého zápisu "text" původně zadaného
@@ -101,11 +118,15 @@ def analyzuj_text(texty_k_analyze, registrovani_uzivatele):
     print("----------------------------------------")
     vybrany_text = vyber_text(texty_k_analyze)
     prevedeny_text = preved_text(vybrany_text)
-    pocet_slov, celkem_velkych_pismen, velka, mala = analyza(prevedeny_text)
+    pocet_slov, celkem_velkych_pismen, velka, mala, pocet_cisel, suma_cisel, cetnost_slov = analyza(prevedeny_text)
     print(pocet_slov)
     print(celkem_velkych_pismen)
     print(velka)
     print(mala)
+    print(pocet_cisel)
+    print(suma_cisel) # 30N není bráno jako číslo 
+    print("********")
+    print(cetnost_slov)
     pass
 
 analyzuj_text(TEXTS, uzivatele)
