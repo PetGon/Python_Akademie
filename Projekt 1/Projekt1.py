@@ -64,7 +64,6 @@ def velke_pismeno(slovo, celkem_vel_pismen):
         celkem_vel_pismen += 1  # inkrementuji o jedna (int) 
     return celkem_vel_pismen
 
-
 def analyza(text):
     pocet_slov = len(text)
     celkem_velkych_pismen = 0
@@ -80,6 +79,7 @@ def analyza(text):
         celkem_cisel, suma_cisel = pocet_cisel(slovo, celkem_cisel, suma_cisel)
         cetnost_slov = cetnost(slovo, cetnost_slov)
     return pocet_slov, celkem_velkych_pismen, velka, mala, celkem_cisel, suma_cisel, cetnost_slov
+
 def preved_text(text):
     text = text.replace(".", "")
     text = text.replace(",", "") # modifikace druhého zápisu "text" původně zadaného
@@ -109,7 +109,7 @@ def zadej_uziv_udaje():
     vloz_heslo = input("password:")
     return vloz_jmeno, vloz_heslo
 
-def analyzuj_text(texty_k_analyze, registrovani_uzivatele):
+def analyzuj_a_tiskni_text(texty_k_analyze, registrovani_uzivatele):
     zadane_jmeno, zadane_heslo = zadej_uziv_udaje()
     over_uzivatele(zadane_jmeno, zadane_heslo, registrovani_uzivatele)
     print("----------------------------------------")
@@ -133,4 +133,4 @@ def analyzuj_text(texty_k_analyze, registrovani_uzivatele):
       print(f"{delka_pocet[0]:>3}|{'*' * delka_pocet[1]:<15}|{delka_pocet[1]:<0}")  
     pass
 
-analyzuj_text(TEXTS, uzivatele)
+analyzuj_a_tiskni_text(TEXTS, uzivatele)
