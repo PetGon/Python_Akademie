@@ -11,9 +11,12 @@ def zadej_over_cislo():
     while True:
         vloz_cislo = input("Enter a number:")
         if vloz_cislo.isdigit():
-            return vloz_cislo
+            if int(vloz_cislo) >= 1000 and int(vloz_cislo) <= 9999: 
+                return vloz_cislo
+            else:
+                print("Please, enter the number between 1000 and 9999.")
         else:
-            print("Please, enter only digites!")
+            print("Please, enter only digits!")
 
 def over_unikatnost(list_cisel):
     if len(list_cisel) == len(set(list_cisel)):
