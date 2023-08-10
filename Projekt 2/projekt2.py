@@ -74,7 +74,7 @@ def run_game():
     print("Let's play a bulls and cows game.")
     print("-----------------------------------------------")
     random_num = gen_num()
-    print(random_num) 
+    #print(random_num) #pro debug
     print("Enter a number:") 
     start_time = datetime.now() 
     while bulls < len(random_num):
