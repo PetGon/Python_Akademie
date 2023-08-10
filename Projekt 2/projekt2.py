@@ -7,6 +7,19 @@ discord: Petra G.#9835
 """
 import random
 
+def vyhodnot_vysledek(pocet_pokusu):
+    if pocet_pokusu <= 2:
+        vysledek = "amazing"
+    elif pocet_pokusu > 2 and pocet_pokusu <= 4:
+        vysledek = "gr8"
+    elif pocet_pokusu > 4 and pocet_pokusu <= 8:
+        vysledek = "good"
+    elif pocet_pokusu > 8 and pocet_pokusu <= 16:
+        vysledek = "average"    
+    else:
+        vysledek = "not so good"
+    return vysledek
+
 def spocitej_cows_bulls(nahodne_cislo, zadane_cislo):
     bulls = 0
     cows = 0
@@ -21,9 +34,7 @@ def spocitej_cows_bulls(nahodne_cislo, zadane_cislo):
 def zadej_over_cislo():
     while True:
         print("-----------------------------------------------")
-        print("Enter a number:")
-        print("-----------------------------------------------")
-        vloz_cislo = input(">>>> ")
+        vloz_cislo = input(">>> ")
         if vloz_cislo.isdigit():
             if int(vloz_cislo) >= 1000 and int(vloz_cislo) <= 9999: 
                 if over_unikatnost(vloz_cislo):
@@ -63,6 +74,7 @@ def spust_hru():
     print("-----------------------------------------------")
     nahodne_cislo = vygeneruj_cislo()
     print(nahodne_cislo) 
+    print("Enter a number:")    
     while bulls < len(nahodne_cislo):
         pocet_pokusu += 1
         zadane_cislo = zadej_over_cislo()
@@ -75,11 +87,13 @@ def spust_hru():
             cow_text = "cow"
         else:
             cow_text = "cows"
-        print(f"{bulls} {bull_text}, {cows} {cow_text}")
+        if bulls < len (nahodne_cislo):
+            print(f"{bulls} {bull_text}, {cows} {cow_text}")
     print("Correct, you've guessed the right number")
     print(f"in {pocet_pokusu} guesses!")
     print("-----------------------------------------------")
-    print("That's ...")
+    vysledek = vyhodnot_vysledek(pocet_pokusu)
+    print(f"That's {vysledek}.")
     pass
 
 spust_hru()
