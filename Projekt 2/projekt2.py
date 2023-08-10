@@ -5,8 +5,8 @@ author: Petra Gondek ♀
 email: petra@gondek.online
 discord: Petra G.#9835
 """
+from datetime import datetime
 import random
-
 def vyhodnot_vysledek(pocet_pokusu):
     if pocet_pokusu <= 2:
         vysledek = "amazing"
@@ -74,7 +74,8 @@ def spust_hru():
     print("-----------------------------------------------")
     nahodne_cislo = vygeneruj_cislo()
     print(nahodne_cislo) 
-    print("Enter a number:")    
+    print("Enter a number:") 
+    zacatek = datetime.now() 
     while bulls < len(nahodne_cislo):
         pocet_pokusu += 1
         zadane_cislo = zadej_over_cislo()
@@ -87,10 +88,16 @@ def spust_hru():
             cow_text = "cow"
         else:
             cow_text = "cows"
+        if pocet_pokusu == 1:
+            pocet_text = "guess"
+        else:
+            pocet_text = "guesses"
         if bulls < len (nahodne_cislo):
             print(f"{bulls} {bull_text}, {cows} {cow_text}")
+    konec = datetime.now()
     print("Correct, you've guessed the right number")
-    print(f"in {pocet_pokusu} guesses!")
+    print(f"in {pocet_pokusu} {pocet_text}!")
+    print(f"The game took {konec - zacatek}.")
     print("-----------------------------------------------")
     vysledek = vyhodnot_vysledek(pocet_pokusu)
     print(f"That's {vysledek}.")
