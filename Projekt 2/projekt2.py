@@ -7,38 +7,39 @@ discord: Petra G.#9835
 """
 from datetime import datetime
 import random
-def vyhodnot_vysledek(pocet_pokusu):
-    if pocet_pokusu <= 2:
-        vysledek = "amazing"
-    elif pocet_pokusu > 2 and pocet_pokusu <= 4:
-        vysledek = "gr8"
-    elif pocet_pokusu > 4 and pocet_pokusu <= 8:
-        vysledek = "good"
-    elif pocet_pokusu > 8 and pocet_pokusu <= 16:
-        vysledek = "average"    
-    else:
-        vysledek = "not so good"
-    return vysledek
 
-def spocitej_cows_bulls(nahodne_cislo, zadane_cislo):
+def check_result(try_number):
+    if try_number <= 2:
+        result_txt = "amazing"
+    elif try_number > 2 and try_number <= 4:
+        result_txt = "gr8"
+    elif try_number > 4 and try_number <= 8:
+        result_txt = "good"
+    elif try_number > 8 and try_number <= 16:
+        result_txt = "average"    
+    else:
+        result_txt = "not so good"
+    return result_txt
+
+def count_cows_bulls(random_num, input_num):
     bulls = 0
     cows = 0
-    for iterace in range(len(nahodne_cislo)):
-        if zadane_cislo[iterace-1] in nahodne_cislo:  # pokud je splněno, je to kráva nebo býk
-            if zadane_cislo[iterace-1] == nahodne_cislo[iterace-1]:  # je to býk
+    for iter in range(len(random_num)):
+        if input_num[iter-1] in random_num:  # pokud je splněno, je to kráva nebo býk
+            if input_num[iter-1] == random_num[iter-1]:  # je to býk
                 bulls += 1
             else:
                 cows += 1
     return bulls, cows
 
-def zadej_over_cislo():
+def input_check_num():
     while True:
         print("-----------------------------------------------")
-        vloz_cislo = input(">>> ")
-        if vloz_cislo.isdigit():
-            if int(vloz_cislo) >= 1000 and int(vloz_cislo) <= 9999: 
-                if over_unikatnost(vloz_cislo):
-                    return list(vloz_cislo)
+        input_num = input(">>> ")
+        if input_num.isdigit():
+            if int(input_num) >= 1000 and int(input_num) <= 9999: 
+                if check_unique(input_num):
+                    return list(input_num)
                 else:
                     print("All numbers must be unique!")
             else:
@@ -46,40 +47,40 @@ def zadej_over_cislo():
         else:
             print("Please, enter only digits!")
 
-def over_unikatnost(list_cisel):
-    if len(list_cisel) == len(set(list_cisel)):
+def check_unique(num_list):
+    if len(num_list) == len(set(num_list)):
         return True
     else:
         return False
     
-def vygeneruj_cislo():
+def gen_num():
     while True:
-        nahodny_cislo = random.randint(1000, 9999)
-        nahodny_cislo = list(str(nahodny_cislo))
-        if over_unikatnost(nahodny_cislo):
-            return nahodny_cislo
+        random_num = random.randint(1000, 9999)
+        random_num = list(str(random_num))
+        if check_unique(random_num):
+            return random_num
 
-def zadej_uziv_udaje():
-    vloz_jmeno = input("username:")
-    return vloz_jmeno
+def input_user():
+    username = input("username:")
+    return username
 
-def spust_hru():
+def run_game():
     bulls = 0
-    pocet_pokusu = 0
-    username = zadej_uziv_udaje()
+    try_number = 0
+    username = input_user()
     print(f"Hi there {username}!")
     print("-----------------------------------------------")
     print("I've generated a random 4 digit number for you.")
     print("Let's play a bulls and cows game.")
     print("-----------------------------------------------")
-    nahodne_cislo = vygeneruj_cislo()
-    print(nahodne_cislo) 
+    random_num = gen_num()
+    print(random_num) 
     print("Enter a number:") 
-    zacatek = datetime.now() 
-    while bulls < len(nahodne_cislo):
-        pocet_pokusu += 1
-        zadane_cislo = zadej_over_cislo()
-        bulls, cows = spocitej_cows_bulls(nahodne_cislo, zadane_cislo)
+    start_time = datetime.now() 
+    while bulls < len(random_num):
+        try_number += 1
+        input_num = input_check_num()
+        bulls, cows = count_cows_bulls(random_num, input_num)
         if bulls == 1:
             bull_text = "bull"
         else:
@@ -88,22 +89,22 @@ def spust_hru():
             cow_text = "cow"
         else:
             cow_text = "cows"
-        if pocet_pokusu == 1:
-            pocet_text = "guess"
+        if try_number == 1:
+            count_txt = "guess"
         else:
-            pocet_text = "guesses"
-        if bulls < len (nahodne_cislo):
+            count_txt = "guesses"
+        if bulls < len (random_num):
             print(f"{bulls} {bull_text}, {cows} {cow_text}")
-    konec = datetime.now()
+    end_time = datetime.now()
     print("Correct, you've guessed the right number")
-    print(f"in {pocet_pokusu} {pocet_text}!")
-    print(f"The game took {konec - zacatek}.")
+    print(f"in {try_number} {count_txt}!")
+    print(f"The game took {end_time - start_time}.")
     print("-----------------------------------------------")
-    vysledek = vyhodnot_vysledek(pocet_pokusu)
-    print(f"That's {vysledek}.")
+    result_txt = check_result(try_number)
+    print(f"That's {result_txt}.")
     pass
 
-spust_hru()
+run_game()
 
 
     
